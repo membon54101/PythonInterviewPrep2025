@@ -105,7 +105,7 @@ class Solution:
     def intersection2(self, arr1, arr2):
         intersects = []
         i, j = 0, 0
-        while i < len(arr1) and j < len(arr2):
+        while i < len(arr1) and j < len(arr2):  
             print(arr[i], arr2[j])
             start = max(arr[i][0], arr2[j][0])
             end = min(arr[i][1], arr2[j][1])

@@ -64,8 +64,33 @@ class Solution:
                 )
         print(dp, dp[m][n])
         return dp[m][n]
+    
+    def queensAttack_practice(self, n, k, q, obstacles):
+        moves_counter = 0 
+        board = [[ 0 for i in range(n) ]for i in range(n)]
+        
+        # Now I will look at the base cases
+        if n <= 1 or k == 0:
+            return 0
 
+        # Now we need to start populating the board.
+        # First we place the queen 4, 3
+        queen_row, queen_column = n - q[0],  q[1] - 1
+        board[queen_row][queen_column] = 'Q'
 
+        for idx, num in enumerate(obstacles):
+            board_row, board_col = n - num[0], num[1] - 1
+            board[board_row][board_col] = 'X'
+
+        moves = [[-1, -1], [-1, 0], [-1, 1], [0, -1], [0, 1], [1, -1], [1, 0], [1,1]]
+        for idx, num in enumerate(moves):
+            multiplier = 1
+            while (queen_row + num[0] * multiplier) in range (0, n)  and (queen_column + num[1]* multiplier) in range(0, n) and board[queen_row + num[0] * multiplier][queen_column + num[1] * multiplier] != 'X':
+                moves_counter += 1
+                multiplier += 1
+        print(moves_counter)
+        return moves_counter
+    
     def queensAttack(self, n, k, q, obstacles):
         board = [[0 for _ in range(n)] for _ in range(n)] 
 
@@ -125,7 +150,7 @@ if __name__ == "__main__":
     k = 3
     q = (4,3)
     obstacles = [(5,5), (4,2), (2,3)]
-    answer = solution.queensAttack(n, k, q, obstacles)
+    answer = solution.queensAttack_practice(n, k, q, obstacles)
     
     # https://www.hackerrank.com/challenges/fibonacci-modified/problem
     t1 = 0
